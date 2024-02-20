@@ -1,0 +1,36 @@
+﻿@model IEnumerable<GuestResponse>
+@{
+    Layout = null;
+}
+
+<!Doctype html>
+<html>
+    <head>
+        <title>
+            List of responses
+        </title>
+    <link rel="stylesheet" type="text/css" href="/lib/bootstrap/dist/css/bootstrap.css" />
+        <style>
+            body {background-color:azure}
+        </style>
+    </head>
+    <body>
+        <div class="text-center">
+            Below are the people who are attending :
+        </div>
+        <div>
+        @foreach(var user in Model)
+        {
+            <ul>
+                <li>
+                   @user.Name
+                </li>
+                <li>
+                    @user.Email
+                </li>
+            </ul>
+
+        }
+        </div>
+    </body>
+</html>

@@ -1,0 +1,103 @@
+﻿@page
+@model IndexModel
+
+@functions{
+    public string GetHello()
+    {
+        return "Hello";
+    }
+}
+
+@{
+    ViewData["Title"] = "Home page";
+    var routedata = new Dictionary<string, string> { { "indexvalue", Model.SelectedIndexId.ToString() } };
+    List<SelectListItem> listStates = new List<SelectListItem>();
+    int SelectedIndex = 0;
+    string somevariable = "";
+
+    void SelectIndexChange()
+    {
+        listStates = new List<SelectListItem>();
+        SelectedIndex = 1;
+        if (SelectedIndex == 1)
+        {
+            listStates.Add(new SelectListItem { Text = "Andhra Pradesh", Value = "-1" });
+            listStates.Add(new SelectListItem { Text = "Telangana", Value = "-2" });
+            listStates.Add(new SelectListItem { Text = "Tamil Nadu", Value = "-3" });
+            listStates.Add(new SelectListItem { Text = "Maharastra", Value = "-4" });
+        }
+        else if (SelectedIndex == 2)
+        {
+            listStates.Add(new SelectListItem { Text = "Texas", Value = "-5" });
+            listStates.Add(new SelectListItem { Text = "California", Value = "-6" });
+            listStates.Add(new SelectListItem { Text = "Michigan", Value = "-7" });
+            listStates.Add(new SelectListItem { Text = "Nevada", Value = "-8" });
+        }
+    }
+
+    void MachineSelected(MachineModel obj)
+    {
+        List<MachineModel> objSelectedModels = new List<MachineModel>();
+        if (!objSelectedModels.Any(x => x.MachineId == obj.MachineId))
+            objSelectedModels.Add(obj);
+    }
+}
+
+<script>
+    function ChangeEvent() {
+        alert('Yes it worked !');
+    }
+</script>
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <form method="post" asp-all-route-data="routedata">
+        <table>
+            <tr>
+                <td>
+                    Select Country :
+                </td>
+
+                <td>
+
+                    @Html.DropDownListFor(m => m.SelectedIndexId,
+                            Model.listCountries,
+                            "--Select Country--", new { onchange = "ChangeEvent();" }
+
+                            //new { onchange = "SelectIndexChange()" }
+                    )
+
+                    @Html.DropDownList("States",
+                           Model.listStates,
+                           "--States Selected--"
+                           )
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <form method="post">
+        <table>
+
+            @foreach (var machine in Model.lstMachines)
+            {
+                <tr>
+                    <td>
+                        @Html.CheckBoxFor(m => m.isReactivate, new { Id = machine.MachineId, value = machine.MachineId, onchange = "MachineSelected(machine)" });
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <br /><br />
+        <button>Click Me </button>
+
+    </form>
+
+</div>

@@ -1,0 +1,49 @@
+﻿@model PartyInvitesProject.Models.GuestResponse
+@{
+    Layout = null;
+}
+
+
+<!Doctype html>
+<html>
+    <head>
+        <title>
+            RSVP Form
+        </title>
+         <link rel="stylesheet" href="/css/site.css" />
+       <style>
+           body { background-color : aliceblue}
+       </style>
+    </head>
+    <body>
+        <div>
+            <p>This is RSVP Form</p>
+            <form asp-action="RSVPForm" method="post">
+                <div asp-validation-summary="All"></div>
+                <div class="form-group">
+                    <label asp-for="Name">Name : </label>
+                    <input asp-for="Name" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email">Email : </label>
+                    <input asp-for="Email" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Phone">Phone : </label>
+                    <input asp-for="Phone" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Will you Attend ?</label>
+                     <select asp-for="WillAttend" class="form-control">
+                        <option value="">Choose an option</option>
+                        <option value="true">Yes I will be there</option>
+                        <option value="false">No I can't attend</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

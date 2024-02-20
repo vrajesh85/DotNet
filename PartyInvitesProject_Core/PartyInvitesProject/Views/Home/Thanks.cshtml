@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+
+@model GuestResponse
+
+
+<!Doctype html>
+<html>
+    <head>
+        <title>Thanks</title>
+        <style>
+            body { background-color:aquamarine}
+        </style>
+    </head>
+    <body>
+       <div>
+           Thank you for your response
+       </div>
+        <div>
+        @if(Model.WillAttend == true){
+            @:Thanks for coming
+        }
+        else {
+            @:Sorry to hear tht you couldn't make it.
+        }
+    </div>
+    </body>
+</html>
